@@ -57,24 +57,24 @@ jobs:
         env:
           CI: true
         
-        - name: Send gemini's error log
-          if: ${{ matrix.test-scope == 'gemini' && failure() }}
-          run: |
-            sh ${{ github.workspace }}/tools/publish-gemini-report.sh
-          env:
-            CI: true
+      - name: Send gemini's error log
+        if: ${{ matrix.test-scope == 'gemini' && failure() }}
+        run: |
+          sh ${{ github.workspace }}/tools/publish-gemini-report.sh
+        env:
+          CI: true
 
   finish:
     needs: tests
     runs-on: ubuntu-latest
     steps:
-    - name: Coveralls
-      uses: coverallsapp/github-action@master
-      with:
-        github-token: ${{ secrets.github_token }}
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.github_token }}
 
-    - name: Deploy to github pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ${{ github.workspace }}/.publish
+      - name: Deploy to github pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ${{ github.workspace }}/.publish
