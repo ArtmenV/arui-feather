@@ -32,7 +32,6 @@ jobs:
         if: ${{ matrix.test-scope == 'lint' }}
         run: |
           npm run lint
-          npm run github-release
           sh ${{ github.workspace }}/tools/publish-styleguide.sh
         env:
           CI: true
