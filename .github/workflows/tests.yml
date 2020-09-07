@@ -66,10 +66,12 @@ jobs:
     needs: tests
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v1
       - name: Coveralls
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.github_token }}
+          path-to-lcov: ${{ github.workspace }}/coverage/lcov.info
 
       - name: Deploy to github pages
         uses: peaceiris/actions-gh-pages@v3
