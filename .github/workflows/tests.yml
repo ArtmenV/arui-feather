@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        test-scope: [lint, unit, gemini]
+        test-scope: [lint, unit]
         node-version: [12.14.1]
 
     steps:
