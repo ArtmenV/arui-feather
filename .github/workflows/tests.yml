@@ -68,7 +68,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: locking for file for coveralls
-        run: echo ${{ github.workspace }} && echo ${{ github.workspace }}/coverage/lcov.info && cat ${{ github.workspace }}/coverage/lcov.info
+        run: echo ${{ github.workspace }} && ls ${{ github.workspace }}
       - name: Coveralls
         uses: coverallsapp/github-action@master
         with:
