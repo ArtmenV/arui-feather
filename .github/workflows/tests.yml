@@ -74,9 +74,3 @@ jobs:
           path-to-lcov: ${{ github.workspace }}/.github/lcov.info
         env:
           CI: true
-
-      - name: Deploy to github pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish-dir: ${{ github.workspace }}/.publish
