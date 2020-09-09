@@ -67,13 +67,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: test
-        run: ls ${{ github.workspace }} && ls ${{ github.workspace }}/.github/workflows
       - name: Coveralls
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.github_token }}
-          path-to-lcov: ${{ github.workspace }}/.github/workflows/coverage/lcov.info
+          path-to-lcov: ${{ github.workspace }}/.github/lcov.info
         env:
           CI: true
 
