@@ -67,10 +67,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+      - name: locking for file for coveralls
+        run: echo ${{ github.workspace }} && echo ${{ github.workspace }}/coverage/lcov.info && cat ${{ github.workspace }}/coverage/lcov.info
       - name: Coveralls
         uses: coverallsapp/github-action@master
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.github_token }}
+          path-to-lcov: ${{ github.workspace }}/coverage/lcov.info
         env:
           CI: true
 
@@ -78,4 +81,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ${{ github.workspace }}/.publish
+          publish-dir: ${{ github.workspace }}/.publish
