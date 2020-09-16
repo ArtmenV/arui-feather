@@ -43,12 +43,14 @@ jobs:
           npm run compile
         env:
           CI: true
-          - name: Coveralls
-            uses: coverallsapp/github-action@master
-            with:
-              github-token: ${{ secrets.github_token }}
-            env:
-              CI: true
+
+      - name: Coveralls
+        if: ${{ matrix.test-scope == 'unit' }}
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.github_token }}
+        env:
+          CI: true
 
       - name: Run gemini
         if: ${{ matrix.test-scope == 'gemini' }}
