@@ -43,6 +43,12 @@ jobs:
           npm run compile
         env:
           CI: true
+          - name: Coveralls
+            uses: coverallsapp/github-action@master
+            with:
+              github-token: ${{ secrets.github_token }}
+            env:
+              CI: true
 
       - name: Run gemini
         if: ${{ matrix.test-scope == 'gemini' }}
@@ -59,18 +65,5 @@ jobs:
         if: ${{ matrix.test-scope == 'gemini' && failure() }}
         run: |
           sh ${{ github.workspace }}/tools/publish-gemini-report.sh
-        env:
-          CI: true
-
-  finish:
-    needs: tests
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Coveralls
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.github_token }}
-          path-to-lcov: ${{ github.workspace }}/.github/lcov.info
         env:
           CI: true
